@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">EmailApp</string>
+
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="start">GOT IT</string>
+    <string name="your_email">Your Email</string>
+    <string name="folders">Folders</string>
+    <string name="more_folders">More Folders</string>
+    <string name="save">Save</string>
+    <string name="inbox">Inbox</string>
+    <string name="settings">Settings</string>
+
+    <!--Menu Left-->
+
+    <string name="sign_in_with_google">Sign in with Google</string>
+    <string name="terms_of_service">Terms of Service</string>
+    <string name="privacy_policy">Privacy Policy</string>
+    <string name="rules_login"><font color='#000000'>By continuing you agree to the Spark</font> <font color='#3D8AFF'><a href="terms:">Terms of Service</a></font> <font color='#000000'>and</font> <font color='#3D8AFF'><a href="privacy:">Privacy Policy</a></font></string>
+    <string name="main_drawer_open_cd">Open navigation drawer</string>
+    <string name="main_drawer_close_cd">Close navigation drawer</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+</resources>
