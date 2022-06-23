@@ -10,9 +10,9 @@ class MailRepository(private val dao: MenuLeftDAO) {
 
     suspend fun insertMenuList(list : List<MenuLeftEntity>) = dao.insertList(list)
 
-    suspend fun insertMenuItem(item: MenuLeftEntity) = dao.insertItem(item)
+    suspend fun deleteMenuLeft(list: MenuLeftEntity) = dao.delete(list)
 
-    suspend fun deleteMenuLeft(list: List<MenuLeftEntity>) = dao.delete(list)
+    suspend fun deleteAll() = dao.deleteAll()
 
     fun isExists(name: String) = dao.isExists(name) != null
 }

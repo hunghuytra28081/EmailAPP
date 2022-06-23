@@ -66,12 +66,10 @@ class EditMenuLeftActivity : AppCompatActivity() {
         }
 
         btn_save.setOnClickListener {
-            for (item in listMenu){
-                if (!menuViewModel.checkIsExists(item.name)){
-                    menuViewModel.insertMenuItem(item)
-                }
+            menuViewModel.apply {
+                deleteAll()
+                insertMenuList(listMenu)
             }
-
             finish()
         }
     }

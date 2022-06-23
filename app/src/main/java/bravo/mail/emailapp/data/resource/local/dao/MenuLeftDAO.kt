@@ -17,10 +17,11 @@ interface MenuLeftDAO {
     @Insert(onConflict = REPLACE)
     suspend fun insertList(item : List<MenuLeftEntity>)
 
-    suspend fun insertItem(item: MenuLeftEntity)
+    @Query("DELETE FROM MenuLeftEntity")
+    suspend fun deleteAll()
 
     @Delete
-    suspend fun delete(item: List<MenuLeftEntity>)
+    suspend fun delete(item: MenuLeftEntity)
 
     @Query("SELECT * FROM menuLeftEntity WHERE name =:name")
     fun isExists(name: String): MenuLeftEntity?

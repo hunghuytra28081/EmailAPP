@@ -24,10 +24,11 @@ class MenuLeftAdapter(
     }
 
     override fun onBindViewHolder(holder: MenuLeftViewHolder, position: Int) {
-        holder.onBind(listMenuDelete[position])
+        val menuItem = differ.currentList[position]
+        holder.onBind(menuItem)
     }
 
-    override fun getItemCount(): Int = listMenuDelete.size
+    override fun getItemCount(): Int = differ.currentList.size
 
     @SuppressLint("NotifyDataSetChanged")
     fun addAllData(entity: List<MenuLeftEntity>) {
@@ -48,7 +49,7 @@ class MenuLeftAdapter(
         notifyDataSetChanged()
     }
 
-    private val differCallback = object: DiffUtil.ItemCallback<MenuLeftEntity>() {
+    private val differCallback = object : DiffUtil.ItemCallback<MenuLeftEntity>() {
         override fun areItemsTheSame(oldItem: MenuLeftEntity, newItem: MenuLeftEntity): Boolean {
             return oldItem == newItem
         }
@@ -66,7 +67,7 @@ class MenuLeftAdapter(
         val fromItem = list[fromPosition]
         list.removeAt(fromPosition)
         if (toPosition < fromPosition) {
-            list.add(toPosition + 1 , fromItem)
+            list.add(toPosition + 1, fromItem)
         } else {
             list.add(toPosition - 1, fromItem)
         }

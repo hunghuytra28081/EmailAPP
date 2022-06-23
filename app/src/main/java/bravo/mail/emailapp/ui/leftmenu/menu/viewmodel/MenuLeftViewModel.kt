@@ -27,13 +27,13 @@ class MenuLeftViewModel(application: Application) : AndroidViewModel(application
         }
     }
 
-    fun insertMenuItem(item: MenuLeftEntity){
+    fun deleteAll(){
         viewModelScope.launch(Dispatchers.IO) {
-            repository.insertMenuItem(item)
+            repository.deleteAll()
         }
     }
 
-    fun deleteItemMenu(list: List<MenuLeftEntity>) {
+    fun deleteItemMenu(list: MenuLeftEntity) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteMenuLeft(list)
         }
