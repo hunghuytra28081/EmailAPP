@@ -156,11 +156,12 @@
             android:background="@color/white_grey" />-->
 
         <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/menu_setting"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:paddingHorizontal="@dimen/_10sdp"
-            android:layout_marginVertical="@dimen/_12sdp">
+            android:paddingVertical="@dimen/_12sdp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="wrap_content"

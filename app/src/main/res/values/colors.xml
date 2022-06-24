@@ -17,4 +17,8 @@
     <color name="bg_grey">#F3F3F3</color>
 
     <color name="bg_recyclerView">#8CE9E9E9</color>
+    <color name="bg_item_move">#C6E2F8</color>
+    <color name="blue_dodger">#1469FF</color>
+    <color name="grey_white">#A6ECECEC</color>
+    <color name="grey_black">#A6CACACA</color>
 </resources>

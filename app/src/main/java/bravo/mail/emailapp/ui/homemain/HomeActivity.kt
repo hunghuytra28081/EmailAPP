@@ -14,6 +14,7 @@ import bravo.mail.emailapp.extension.addFragment
 import bravo.mail.emailapp.ui.home.HomeFragment
 import bravo.mail.emailapp.ui.leftmenu.EditMenuLeftActivity
 import bravo.mail.emailapp.ui.leftmenu.menu.viewmodel.MenuLeftViewModel
+import bravo.mail.emailapp.ui.setting.SettingActivity
 import bravo.mail.emailapp.utils.Constant.PRE_ROOM
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_bar_home_main.*
@@ -84,6 +85,11 @@ class HomeActivity : AppCompatActivity() {
     private fun initHandles() {
         linear_edit_list.setOnClickListener {
             val intent = Intent(this, EditMenuLeftActivity::class.java)
+            startActivity(intent)
+        }
+
+        menu_setting.setOnClickListener {
+            val intent = Intent(this, SettingActivity::class.java)
             startActivity(intent)
         }
     }

@@ -50,10 +50,12 @@ class MoreMenuAdapter(
                 img_icon_item_left_menu.setImageResource(entity.image)
                 tv_name_item_left_menu.text = entity.name
 
+                alpha = 1F
+
                 setOnClickListener {
                     animate().alpha(0F).setDuration(500).withEndAction {
                         onItemClick(entity)
-                        animate().alpha(1F)
+//                        animate().alpha(1F)
                     }
                 }
             }

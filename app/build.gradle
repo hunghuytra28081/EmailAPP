@@ -74,4 +74,7 @@ dependencies {
 
     //SDP
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
+
+    //Indicator
+    implementation("com.tbuonomo:dotsindicator:4.3")
 }
