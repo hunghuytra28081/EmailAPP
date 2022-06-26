@@ -14,7 +14,7 @@ class MenuLeftAdapter(
     private val onItemMove: (MenuLeftEntity) -> Unit
 ) : RecyclerView.Adapter<MenuLeftAdapter.MenuLeftViewHolder>() {
 
-    private var listMenuLeft = ArrayList<MenuLeftEntity>()
+//    private var listMenuLeft = ArrayList<MenuLeftEntity>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuLeftViewHolder {
         val binding =
@@ -23,30 +23,31 @@ class MenuLeftAdapter(
     }
 
     override fun onBindViewHolder(holder: MenuLeftViewHolder, position: Int) {
-//        val menuItem = differ.currentList[position]
-        holder.onBind(listMenuLeft[position])
+        val menuItem = differ.currentList[position]
+        holder.onBind(menuItem)
     }
 
-    override fun getItemCount(): Int = listMenuLeft.size
+//    override fun getItemCount(): Int = listMenuLeft.size
+    override fun getItemCount(): Int = differ.currentList.size
 
-    @SuppressLint("NotifyDataSetChanged")
-    fun addAllData(entity: List<MenuLeftEntity>) {
-        this.listMenuLeft.clear()
-        this.listMenuLeft.addAll(entity)
-        notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun addItemData(entity: MenuLeftEntity) {
-        this.listMenuLeft.add(entity)
-        notifyDataSetChanged()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun removeData(entity: MenuLeftEntity) {
-        this.listMenuLeft.remove(entity)
-        notifyDataSetChanged()
-    }
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun addAllData(entity: List<MenuLeftEntity>) {
+//        this.listMenuLeft.clear()
+//        this.listMenuLeft.addAll(entity)
+//        notifyDataSetChanged()
+//    }
+//
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun addItemData(entity: MenuLeftEntity) {
+//        this.listMenuLeft.add(entity)
+//        notifyDataSetChanged()
+//    }
+//
+//    @SuppressLint("NotifyDataSetChanged")
+//    fun removeData(entity: MenuLeftEntity) {
+//        this.listMenuLeft.remove(entity)
+//        notifyDataSetChanged()
+//    }
 
     fun removeDiff(entity: MenuLeftEntity) {
         val currentList = differ.currentList.toMutableList()

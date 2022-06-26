@@ -28,7 +28,7 @@ class MoreMenuAdapter(
     override fun getItemCount(): Int = listMenuDelete.size
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addData(menuLeft: List<MenuLeft>) {
+    fun updateData(menuLeft: List<MenuLeft>) {
         this.listMenuDelete.clear()
         this.listMenuDelete.addAll(menuLeft)
         notifyDataSetChanged()
@@ -51,11 +51,9 @@ class MoreMenuAdapter(
                 tv_name_item_left_menu.text = entity.name
 
                 alpha = 1F
-
                 setOnClickListener {
                     animate().alpha(0F).setDuration(500).withEndAction {
                         onItemClick(entity)
-//                        animate().alpha(1F)
                     }
                 }
             }

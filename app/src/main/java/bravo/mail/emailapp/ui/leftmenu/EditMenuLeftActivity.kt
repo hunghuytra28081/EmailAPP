@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import bravo.mail.emailapp.R
 import bravo.mail.emailapp.data.model.MenuLeft
 import bravo.mail.emailapp.data.resource.local.entity.MenuLeftEntity
+import bravo.mail.emailapp.ui.leftmenu.menu.adapter.MenuAdapter
 import bravo.mail.emailapp.ui.leftmenu.menu.adapter.MenuLeftAdapter
 import bravo.mail.emailapp.ui.leftmenu.menu.viewmodel.MenuLeftViewModel
 import bravo.mail.emailapp.ui.leftmenu.moremenu.adapter.MoreMenuAdapter
@@ -20,7 +21,7 @@ import kotlinx.android.synthetic.main.activity_edit_left_menu.*
 
 class EditMenuLeftActivity : AppCompatActivity() {
 
-    private val menuAdapter by lazy { MenuLeftAdapter(::onItemClickMenu,::onItemMoveMenu) }
+    private val menuAdapter by lazy { MenuAdapter(::onItemClickMenu,::onItemMoveMenu) }
     private val moreMenuAdapter by lazy { MoreMenuAdapter(::onItemClickMoreMenu) }
 
     private val menuViewModel by lazy { ViewModelProvider(this)[MenuLeftViewModel::class.java] }
@@ -39,11 +40,13 @@ class EditMenuLeftActivity : AppCompatActivity() {
                 viewHolder: RecyclerView.ViewHolder,
                 target: RecyclerView.ViewHolder
             ): Boolean {
-                val adapter = recyclerView.adapter as MenuLeftAdapter
+//                val adapter = recyclerView.adapter as MenuLeftAdapter
+                val adapter = recyclerView.adapter as MenuAdapter
                 val from = viewHolder.adapterPosition
                 val to = target.adapterPosition
                 adapter.moveItemInRecyclerViewList(from, to)
                 adapter.notifyItemMoved(from, to)
+
                 return true
             }
 
@@ -80,8 +83,8 @@ class EditMenuLeftActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_left_menu)
 
-        initView()
         initData()
+        initView()
         initHandles()
     }
 
@@ -94,23 +97,21 @@ class EditMenuLeftActivity : AppCompatActivity() {
             menuViewModel.apply {
                 deleteAll()
                 insertMenuList(listMenu)
-                Log.e("Edit12345",listMenu.size.toString())
+                Log.e("Edit12345 onclick save",listMenu.size.toString())
             }
             finish()
         }
     }
 
     private fun initView() {
-        /*itemTouchHelper.attachToRecyclerView(rcv_list_menu)
-        menuAdapter.differ.submitList(menuViewModel.readAllDataLive.value)*/
+        itemTouchHelper.attachToRecyclerView(rcv_list_menu)
+//        menuAdapter.submitList(menuViewModel.readAllDataLive.value)
 
         rcv_list_menu.apply {
             adapter = menuAdapter
-            setHasFixedSize(true)
         }
         rcv_list_more_menu.apply {
             adapter = moreMenuAdapter
-            setHasFixedSize(true)
             layoutManager = LinearLayoutManager(
                 context,
                 LinearLayoutManager.VERTICAL,
@@ -121,10 +122,11 @@ class EditMenuLeftActivity : AppCompatActivity() {
 
     private fun initData() {
         menuViewModel.readAllDataLive.observe(this) {
-            listMenu.addAll(it)
-//            menuAdapter.differ.submitList(listMenu)
-            menuAdapter.addAllData(listMenu)
-            Log.e("Edit12345",listMenu.size.toString())
+            listMenu.addAll(it.toMutableList())
+//            menuAdapter.submitList(listMenu)
+//            menuAdapter.addAllData(listMenu)
+            menuAdapter.setData(listMenu)
+            Log.e("Edit12345 init data",listMenu.size.toString())
         }
 
         listMenuAll.addAll(
@@ -149,14 +151,15 @@ class EditMenuLeftActivity : AppCompatActivity() {
                 listMoreMenu.add(item)
             }
         }
-        moreMenuAdapter.addData(listMoreMenu)
+        moreMenuAdapter.updateData(listMoreMenu)
     }
 
     private fun onItemClickMenu(menuLeftEntity: MenuLeftEntity, position: Int) {
         listMenu.remove(menuLeftEntity)
-        Log.e("Edit12345",listMenu.size.toString())
-//        menuAdapter.removeDiff(menuLeftEntity)
-        menuAdapter.removeData(menuLeftEntity)
+        Log.e("Edit12345 onclick menu",listMenu.size.toString())
+        menuAdapter.removeDiff(menuLeftEntity)
+        menuAdapter.submitList(listMenu)
+//        menuAdapter.removeData(menuLeftEntity)
 
         itemMoreMenu = MenuLeft(menuLeftEntity.name, menuLeftEntity.image)
         listMoreMenu.add(itemMoreMenu)
@@ -167,14 +170,15 @@ class EditMenuLeftActivity : AppCompatActivity() {
 
         //remove item list menu
         listMoreMenu.remove(menuLeft)
-        moreMenuAdapter.addData(listMoreMenu)
+        moreMenuAdapter.updateData(listMoreMenu)
 
         //add item list more menu
         itemMenu = MenuLeftEntity(menuLeft.name, menuLeft.image)
         listMenu.add(itemMenu)
-        Log.e("Edit12345",listMenu.size.toString())
-        menuAdapter.addItemData(itemMenu)
-//        menuAdapter.addDiff(itemMenu)
+        Log.e("Edit12345 onclick more menu",listMenu.size.toString())
+//        menuAdapter.addItemData(itemMenu)
+        menuAdapter.addDiff(itemMenu)
+//        menuAdapter.submitList(listMenu)
     }
 
     private fun onItemMoveMenu(menuLeftEntity: MenuLeftEntity) {
